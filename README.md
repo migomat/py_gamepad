@@ -12,6 +12,7 @@ sudo apt-get install python-dev
 1. bitarray
 https://pypi.python.org/pypi/bitarray/
 
-2
+2. Serial.readBytes 
+https://www.arduino.cc/reference/en/language/functions/communication/serial/readbytes/
 
 
