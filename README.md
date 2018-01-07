@@ -15,7 +15,10 @@ https://pypi.python.org/pypi/bitarray/
 2. bit mainipulation
 https://www.tutorialspoint.com/python/bitwise_operators_example.htm
 
-3. Serial.readBytes 
+3. converting int to bytes
+https://stackoverflow.com/questions/10411085/converting-integer-to-binary-in-python
+
+4. Serial.readBytes 
 https://www.arduino.cc/reference/en/language/functions/communication/serial/readbytes/
 
 
