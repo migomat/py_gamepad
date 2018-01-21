@@ -13,7 +13,7 @@ pip3 install bitarray
 pip3 install evdev
 pip3 install serial
 ```
-###### 1. Searching for gamepad
+## 1. Searching for gamepad
 before connecting gamepad gamepad
 ```
 ls /dev/input
@@ -35,11 +35,12 @@ by-path  event1  event3  event5  event7  js1  mice  mouse1`
 
 in that case gamepad is connected as 'event7'
 
-###### 2. Searching for COMx port 
+## 2. Searching for COMx port
 
 
 
 
+## Stuff that might help to understand the code
 1. bitarray
 https://pypi.python.org/pypi/bitarray/
 
