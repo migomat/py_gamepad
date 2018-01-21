@@ -2,15 +2,15 @@ import evdev
 import serial
 from bitarray import bitarray
 
-arduino_port = serial.Serial('/dev/ttyUSB0',9600, timeout=3.0)
+arduino_port = serial.Serial('/dev/ttyS0',115200, timeout=3.0)
 from evdev import InputDevice, categorize, ecodes, KeyEvent
 devices = [evdev.InputDevice(fn) for fn in evdev.list_devices()]
-import RPi.GPIO as GPIO
+#import RPi.GPIO as GPIO
 
 for device in devices:
     print(device.fn, device.name, device.phys)
 
-gamepad = InputDevice('/dev/input/event0')
+gamepad = InputDevice('/dev/input/event6')
 dataframe = bitarray('00000000')
 
 
@@ -114,10 +114,3 @@ for event in gamepad.read_loop():
     elif event.code==298:
         if event.value==1:
             print('l_tog')
-  #  print(dataframe)
- #   arduino_port.close()
-   # else:
-        #print('unrecognizable button')
-        #print(event.code)
-       # print(event)
-   
