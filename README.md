@@ -3,10 +3,14 @@ Reading Wireless gamepad input and translate it on GIPO
 
 linux console:
 ```
-pip3 install bitarray
-```
-```
 sudo apt-get install python3-dev
+sudo apt-get install python3-pip
+```
+
+
+```
+pip3 install bitarray
+pip3 install evdev
 ```
 
 
