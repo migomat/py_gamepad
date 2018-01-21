@@ -19,7 +19,7 @@ before connecting gamepad gamepad
 ls /dev/input
 ```
 
-console result
+console result: 
 `mietek@mietek-VirtualBox:~$ ls /dev/input/
 by-id    event0  event2  event4  event6  js1   mouse0
 by-path  event1  event3  event5  js0     mice  mouse1`
@@ -28,14 +28,12 @@ afer connecting gamepad
 ```
 ls /dev/input
 ```
-console result
+console result: 
 `mietek@mietek-VirtualBox:~$ ls /dev/input/
 by-id    event0  event2  event4  event6  js0  js2   mouse0
 by-path  event1  event3  event5  event7  js1  mice  mouse1`
 
-
-
-
+in that case gamepad is connected as 'event7'
 
 
 
