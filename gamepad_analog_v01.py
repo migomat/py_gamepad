@@ -2,10 +2,10 @@ import evdev
 import serial
 from bitarray import bitarray
 
-arduino_port = serial.Serial('/dev/ttyUSB0',9600, timeout=3.0)
+arduino_port = serial.Serial('/dev/ttyS0',115200, timeout=3.0)
 from evdev import InputDevice, categorize, ecodes, KeyEvent
 devices = [evdev.InputDevice(fn) for fn in evdev.list_devices()]
-import RPi.GPIO as GPIO
+#import RPi.GPIO as GPIO
 analog_on=True
 
 def bit_adding(): #function definition putting all dataframes together
@@ -13,20 +13,20 @@ def bit_adding(): #function definition putting all dataframes together
     temp=bitarray('00000000')
     dataframe_total=dataframe_total | dataframe
     #dataframe_total=dataframe_total<<8
-    dataframe_total.extend(temp | dataframe_l_joy_lr)
+    dataframe_total.extend(dataframe_l_joy_lr)
     #dataframe_total=dataframe_total<<8
-    dataframe_total.extend(temp | dataframe_l_joy_updown)
+    dataframe_total.extend(dataframe_l_joy_updown)
     #dataframe_total=dataframe_total<<8
-    dataframe_total.extend(temp | dataframe_r_joy_lr)
+    dataframe_total.extend(dataframe_r_joy_lr)
     #dataframe_total=dataframe_total<<8
-    dataframe_total.extend(temp | dataframe_r_joy_updown)
+    dataframe_total.extend(dataframe_r_joy_updown)
     print('Transfered dataframe: {}'.format(dataframe_total))
     return dataframe_total#end of function
 
 for device in devices:
     print(device.fn, device.name, device.phys)
 
-gamepad = InputDevice('/dev/input/event0')
+gamepad = InputDevice('/dev/input/event6')
 dataframe = bitarray('00000000')
 dataframe_l_joy_updown = bitarray('00000000')
 dataframe_l_joy_lr = bitarray('00000000')
@@ -52,16 +52,19 @@ for event in gamepad.read_loop():
     if analog_on==True and event.type == 3:
         if event.code == 0:
             dataframe_l_joy_lr="{0:08b}".format(event.value) #conversion from int to string 01010000111            
-            dataframe_l_joy_lr=bitarray(dataframe_l_joy_lr)
-            print('Lanalog LR: {}'.format(event.value))            
+            dataframe_l_joy_lr=bitarray(dataframe_l_joy_lr) #changing converted stings 0101010 into bitarray
+            print('Lanalog LR: {}'.format(event.value)) #test print of values no           
         if event.code == 1:
-            dataframe_l_joy_updown=bitarray(event.value)
+            dataframe_l_joy_updown="{0:08b}".format(event.value)
+            dataframe_l_joy_updown=bitarray(dataframe_l_joy_updown)
             print('Lanalog UpDown: {}'.format(event.value))
         if event.code == 2:
-            dataframe_l_joy_lr=bitarray(event.value)
+            dataframe_r_joy_lr="{0:08b}".format(event.value)
+            dataframe_r_joy_lr=bitarray(dataframe_r_joy_lr)
             print('Ranalog LR: {}'.format(event.value))
         if event.code == 5:
-            dataframe_l_joy_updown=bitarray(event.value)
+            dataframe_r_joy_updown="{0:08b}".format(event.value)
+            dataframe_r_joy_updown=bitarray(dataframe_r_joy_updown)
             print('Ranalog UpDown: {}'.format(event.value))
                 
             
@@ -153,7 +156,7 @@ for event in gamepad.read_loop():
         if event.value==1:
             print('l_tog')
             
-    #bit_adding()
+    bit_adding()
   #  print(dataframe)
  #   arduino_port.close()
    # else:
